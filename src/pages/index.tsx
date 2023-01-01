@@ -1,37 +1,48 @@
 import * as React from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
+// import { Link } from "gatsby"
 
 // import Layout from "../components/layout"
 import PurchaseButton from "../components/buttons/PurchaseButton"
 import CourseCard from "../components/cards/CourseCard"
 import Seo from "../components/seo"
+import FlutterBuild from "../components/builds/FlutterBuild"
+import { useWindowSize } from "react-use"
+import GridSection from "../components/sections/GridSection"
 
-const IndexPage = () => (
-  <Wrapper>
-    <HeroWrapper>
-      <CourseCard />
-      <TextWrapper>
-        <Logo src="/images/logos/react-logo.svg" alt="logo" />
-        <Title>Build a web app with React Hooks</Title>
-        <Caption>20 sections - 3 hours of videos</Caption>
-        <Description>
-          Learn how we built the new Design+Code site with React Hooks using
-          Gatsby, Netlify, and advanced CSS techniques with Styled Components.
-        </Description>
-        <AuthorWrapper>
-          <AuthorImage src="/images/avatars/jeanmarc.png" alt="avatar" />
-          <Caption>Taught by Janith Bimsara</Caption>
-        </AuthorWrapper>
-        <PurchaseButton />
-        <SmallText>
-          Purchase includes access to 30 courses. Over 80 hours of content,
-          including 12 hours for SwiftUI, for iOS 13 and iOS 14.
-        </SmallText>
-      </TextWrapper>
-    </HeroWrapper>
-  </Wrapper>
-)
+const IndexPage = () => {
+  const { width } = useWindowSize()
+  return (
+    <Wrapper>
+      <HeroWrapper>
+        <CourseCard />
+        <TextWrapper>
+          <Logo src="/images/logos/react-logo.svg" alt="logo" />
+          <Title>Build a web app with React Hooks</Title>
+          <Caption>20 sections - 3 hours of videos</Caption>
+          <Description>
+            Learn how we built the new Design+Code site with React Hooks using
+            Gatsby, Netlify, and advanced CSS techniques with Styled Components.
+          </Description>
+          <AuthorWrapper>
+            <AuthorImage src="/images/avatars/jeanmarc.png" alt="avatar" />
+            <Caption>Taught by Janith Bimsara</Caption>
+          </AuthorWrapper>
+          <PurchaseButton />
+          <SmallText>
+            Purchase includes access to 30 courses. Over 80 hours of content,
+            including 12 hours for SwiftUI, for iOS 13 and iOS 14.
+          </SmallText>
+        </TextWrapper>
+      </HeroWrapper>
+      <Divider />
+      <GridSection />
+      <FlutterWrapper width={width}>
+        <FlutterBuild />
+      </FlutterWrapper>
+    </Wrapper>
+  )
+}
 
 /**
  * Head export to define metadata for the page
@@ -47,6 +58,7 @@ export default IndexPage
 const Wrapper = styled.div`
   height: 1247px;
   background: linear-gradient(200.44deg, #4316db 13.57%, #9076e7 98.38%);
+  overflow: hidden;
 `
 
 const TextWrapper = styled.div`
@@ -73,7 +85,7 @@ const HeroWrapper = styled.div`
   justify-content: center;
   margin: 0 auto;
 
-  .courseCard{
+  .courseCard {
     margin-top: 39px;
   }
 
@@ -123,4 +135,18 @@ const SmallText = styled.p`
   font-size: 13px;
   line-height: 130%;
   color: rgba(255, 255, 255, 0.7);
+`
+const FlutterWrapper = styled.div`
+  margin: 100px auto;
+
+  @media (max-width: 1440px) {
+    transform-origin: top left;
+    transform: scale(${props => props.width / 1440});
+  }
+`
+const Divider = styled.div`
+  width: 300px;
+  height: 0.5px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 60px auto 30px;
 `
